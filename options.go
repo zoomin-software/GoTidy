@@ -75,16 +75,6 @@ func (this *Tidy) Doctype(val string) (bool, error) {
 	return this.optSetString(C.TidyDoctype, v)
 }
 
-// This option specifies if Tidy should discard empty paragraphs.
-func (this *Tidy) DropEmptyParas(val bool) (bool, error) {
-	return this.optSetBool(C.TidyDropEmptyParas, cBool(val))
-}
-
-// This option specifies if Tidy should discard <FONT> and <CENTER> tags without creating the corresponding style rules. This option can be set independently of the clean option.
-func (this *Tidy) DropFontTags(val bool) (bool, error) {
-	return this.optSetBool(C.TidyDropFontTags, cBool(val))
-}
-
 // This option specifies if Tidy should strip out proprietary attributes, such as MS data binding attributes.
 func (this *Tidy) DropProprietaryAttributes(val bool) (bool, error) {
 	return this.optSetBool(C.TidyDropPropAttrs, cBool(val))
@@ -123,11 +113,6 @@ func (this *Tidy) FixUri(val bool) (bool, error) {
 // This option specifies if Tidy should print out comments.
 func (this *Tidy) HideComments(val bool) (bool, error) {
 	return this.optSetBool(C.TidyHideComments, cBool(val))
-}
-
-// This option specifies if Tidy should omit optional end-tags when generating the pretty printed markup. This option is ignored if you are outputting to XML.
-func (this *Tidy) HideEndtags(val bool) (bool, error) {
-	return this.optSetBool(C.TidyHideEndTags, cBool(val))
 }
 
 // This option specifies if Tidy should indent <![CDATA[]]> sections.
@@ -336,11 +321,6 @@ func (this *Tidy) PunctuationWrap(val bool) (bool, error) {
 const None int = 0
 const Alpha int = 1
 
-// Currently not used. Tidy Classic only.
-func (this *Tidy) Split(val bool) (bool, error) {
-	return this.optSetBool(C.TidyBurstSlides, cBool(val))
-}
-
 // This option specifies the number of columns that Tidy uses between successive tab stops. It is used to map tabs to spaces when reading the input. Tidy never outputs tabs.
 func (this *Tidy) TabSize(val int) (bool, error) {
 	return this.optSetInt(C.TidyTabSize, (C.ulong)(val))
@@ -426,13 +406,6 @@ func (this *Tidy) InputEncoding(val int) (bool, error) {
 	return false, errors.New("Argument val int is out of range (0-13)")
 }
 
-// Currently not used, but this option specifies the language Tidy uses (for instance "en").
-func (this *Tidy) Language(val string) (bool, error) {
-	v := (*C.tmbchar)(C.CString(val))
-	defer C.free(unsafe.Pointer(v))
-	return this.optSetString(C.TidyLanguage, v)
-}
-
 const LF int = 0
 const CRLF int = 1
 const CR int = 2
@@ -501,13 +474,6 @@ func (this *Tidy) OutputFile(val string) (bool, error) {
 // This option specifies if Tidy should output the summary of the numbers of errors and warnings, or the welcome or informational messages.
 func (this *Tidy) Quiet(val bool) (bool, error) {
 	return this.optSetBool(C.TidyQuiet, cBool(val))
-}
-
-// Currently not used. Tidy Classic only.
-func (this *Tidy) SlideStyle(val string) (bool, error) {
-	v := (*C.tmbchar)(C.CString(val))
-	defer C.free(unsafe.Pointer(v))
-	return this.optSetString(C.TidySlideStyle, v)
 }
 
 // This option specifies if Tidy should add a meta element to the document head to indicate that the document has been tidied. Tidy won't add a meta element if one is already present.
