@@ -2,7 +2,9 @@ package tidy
 
 /*
 #include <tidy.h>
-#include <buffio.h>
+#include <tidybuffio.h>
+#include <tidyenum.h>
+#include <tidyplatform.h>
 #include <errno.h>
 */
 import "C"
