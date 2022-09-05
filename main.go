@@ -24,6 +24,7 @@ type Tidy struct {
 func New() *Tidy {
 	t := &Tidy{}
 	t.tdoc = C.tidyCreate()
+	C.tidyBufInit(&t.errbuf)
 	return t
 }
 
