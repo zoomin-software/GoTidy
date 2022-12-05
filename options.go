@@ -464,6 +464,12 @@ func (this *Tidy) KeepTime(val bool) (bool, error) {
 	return this.optSetBool(C.TidyKeepFileTimes, cBool(val))
 }
 
+// With the default no Tidy will replace all source tabs with spaces, controlled by the option tab-size, and the current line offset. Of course, except in the special blocks/elements enumerated below, this will later be reduced to just one space.
+// If set yes this option specifies Tidy should keep certain tabs found in the source, but only in preformatted blocks like <pre>, and other CDATA elements like <script>, <style>, and other pseudo elements like <?php ... ?>. As always, all other tabs, or sequences of tabs, in the source will continue to be replaced with a space. 
+func (this *Tidy) KeepTabs(val bool) (bool, error) {
+	return this.optSetBool(C.TidyKeepTabs, cBool(val))
+}
+
 // This option specifies the output file Tidy uses for markup. Normally markup is written to "stdout".
 func (this *Tidy) OutputFile(val string) (bool, error) {
 	v := (*C.tmbchar)(C.CString(val))
